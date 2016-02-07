@@ -1,0 +1,16 @@
+# NAMESPACE for package 'hpdi'
+
+importFrom(coda, as.mcmc.list)
+
+export(hpdi)
+
+S3method("hpdi", "default")
+S3method("hpdi", "matrix")
+S3method("hpdi", "data.frame")
+S3method("hpdi", "density")
+S3method("hpdi", "mcmc.list")
+S3method("hpdi", "function")
+S3method("hpdi", "bugs")
+S3method("hpdi", "rjags")
+S3method("hpdi", "runjags")
+S3method("hpdi", "jagsUI")
