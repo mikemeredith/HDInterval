@@ -1,0 +1,6 @@
+CHANGES in 0.0.2 on 2016-02-10
+
+  * hpdi.density now returns a length-2 vector when allowSplit=FALSE, otherwise a matrix,
+      which may have only one row.
+  
+  * Testthat functions added for hpdi.density

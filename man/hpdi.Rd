@@ -14,7 +14,9 @@
 Highest (Posterior) Density Interval
 }
 \description{
-Calculate the highest density interval (HDI) for a given probability mass, see Details. The function is generic, with methods for a range of input objects.
+Calculate the highest density interval (HDI) for a probability distribution for a given probability mass. This is often applied to a Bayesian posterior distribution and is then termed "highest posterior density interval", but can be applied to any distribution, including priors.
+
+The function is an S3 generic, with methods for a range of input objects.
 }
 \usage{
 hpdi(object, credMass = 0.95, ...)
@@ -56,13 +58,13 @@ named parameters to be passed to other methods; see Examples.
 }
 }
 \details{
-The HDI is the interval which contains the required mass such that all points within the interval have a higher probability density than points outside the interval. When applied to a posterior probability density, it is often known as the Highest Posterior Density (HPD).
+The HDI is the interval which contains the required mass such that all points within the interval have a higher probability density than points outside the interval.
 
 \figure{HDIskew.jpg}
 
 In contrast, a symmetric density interval defined by (eg.) the 10\% and 90\% quantiles may include values with lower probability than those excluded.
 
-For a distribution that is not severely multimodal, the HDI is the narrowest interval containing the specified mass, and the \code{hpdi} function actually returns the narrowest interval. This does not always work properly for multimodel densities, where the HDI may be discontinuous (the horizontal black line in the  Figure below). The single interval returned by \code{hpdi} (the blue line) may incorrectly include values between the modes with low probability density. The \code{density} method with \code{combine = FALSE} gives separate limits for discontinuous HDIs.
+For a distribution that is not severely multimodal, the HDI is the narrowest interval containing the specified mass, and the \code{hpdi} function actually returns the narrowest interval. This does not always work properly for multimodel densities, where the HDI may be discontinuous (the horizontal black line in the  Figure below). The single interval returned by \code{hpdi} (the blue line) may incorrectly include values between the modes with low probability density. The \code{density} method with \code{allowSplit = TRUE} gives separate limits for discontinuous HDIs.
 
 \figure{HDIbimodal.jpg}
 
@@ -86,7 +88,7 @@ The \code{density} method with \code{allowSplit=TRUE} produces a matrix with a r
 Kruschke, J. K. 2011. \emph{Doing Bayesian data analysis: a tutorial with R and BUGS.} Elsevier, Amsterdam, section 3.3.5.
 }
 \author{
-Mike Meredith. Code for \code{hpdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
+John Krushke and Mike Meredith. Code for \code{hpdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
 }
 
 \examples{
@@ -120,10 +122,9 @@ segments(hdiMC[1], 0, hdiMC[2], 0, lwd=3, col='red')
 
 dens2 <- density(tst2)
 lines(dens2, lwd=2, col='blue')
-(hdiD1 <- hpdi(dens2))  # default combine = TRUE; note the warning
+(hdiD1 <- hpdi(dens2))  # default allowSplit = FALSE; note the warning
 (ht <- attr(hdiD1, "height"))
 segments(hdiD1[1], ht, hdiD1[2], ht, lty=3, col='blue')
-# This is not a valid 95% CrI
 (hdiD2 <- hpdi(dens2, allowSplit=TRUE))
 segments(hdiD2[, 1], ht, hdiD2[, 2], ht, lwd=3, col='blue')
 # This is the correct 95% HDI.
