@@ -1,8 +1,8 @@
 # This file has the S3 generic 'hpdi' function and a series of methods.
 
-hpdi <- function(object, credMass=0.95, ...) UseMethod("hpdi")
+hdi <- function(object, credMass=0.95, ...) UseMethod("hdi")
 
-hpdi.default <- function(object, credMass=0.95, ...) {
+hdi.default <- function(object, credMass=0.95, ...) {
   if(!is.numeric(object))
     stop(paste("No applicable method for class", class(object)))
   checkCredMass(credMass)
@@ -24,33 +24,33 @@ hpdi.default <- function(object, credMass=0.95, ...) {
   return(result)
 }
 
-hpdi.matrix <- function(object, credMass=0.95, ...) {
-  result <- apply(object, 2, hpdi.default, credMass=credMass, ...)
+hdi.matrix <- function(object, credMass=0.95, ...) {
+  result <- apply(object, 2, hdi.default, credMass=credMass, ...)
   attr(result, "credMass") <- credMass
   return(result)
 }
 
-hpdi.data.frame <- function(object, credMass=0.95, ...)
-  hpdi.matrix(as.matrix(object), credMass=credMass, ...)
+hdi.data.frame <- function(object, credMass=0.95, ...)
+  hdi.matrix(as.matrix(object), credMass=credMass, ...)
 
 
-hpdi.mcmc.list <- function(object, credMass=0.95, ...)
-  hpdi.matrix(as.matrix(object), credMass=credMass, ...)
+hdi.mcmc.list <- function(object, credMass=0.95, ...)
+  hdi.matrix(as.matrix(object), credMass=credMass, ...)
 
-hpdi.mcmc <- function(object, credMass=0.95, ...)
-  hpdi.matrix(as.matrix(object), credMass=credMass, ...)
+hdi.mcmc <- function(object, credMass=0.95, ...)
+  hdi.matrix(as.matrix(object), credMass=credMass, ...)
 
-hpdi.bugs <- function(object, credMass=0.95, ...)
-  hpdi.matrix(object$sims.matrix, credMass=credMass, ...)
+hdi.bugs <- function(object, credMass=0.95, ...)
+  hdi.matrix(object$sims.matrix, credMass=credMass, ...)
 
-hpdi.rjags <- function(object, credMass=0.95, ...)
-  hpdi.matrix(object$BUGSoutput$sims.matrix, credMass=credMass, ...)
+hdi.rjags <- function(object, credMass=0.95, ...)
+  hdi.matrix(object$BUGSoutput$sims.matrix, credMass=credMass, ...)
 
-hpdi.runjags <- function(object, credMass=0.95, ...)
-  hpdi.mcmc.list(as.mcmc.list(object), credMass=credMass, ...)
+hdi.runjags <- function(object, credMass=0.95, ...)
+  hdi.mcmc.list(as.mcmc.list(object), credMass=credMass, ...)
 
-hpdi.jagsUI <- function(object, credMass=0.95, ...)
-  hpdi.mcmc.list(object$samples, credMass=credMass, ...)
+hdi.jagsUI <- function(object, credMass=0.95, ...)
+  hdi.mcmc.list(object$samples, credMass=credMass, ...)
 
 
 

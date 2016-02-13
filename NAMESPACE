@@ -1,17 +1,17 @@
-# NAMESPACE for package 'hpdi'
+# NAMESPACE for package 'HDInterval'
 
 importFrom("stats", "optimize")
 importFrom("coda", "as.mcmc.list")
 
-export(hpdi)
+export(hdi)
 
-S3method("hpdi", "default")
-S3method("hpdi", "matrix")
-S3method("hpdi", "data.frame")
-S3method("hpdi", "density")
-S3method("hpdi", "mcmc.list")
-S3method("hpdi", "function")
-S3method("hpdi", "bugs")
-S3method("hpdi", "rjags")
-S3method("hpdi", "runjags")
-S3method("hpdi", "jagsUI")
+S3method("hdi", "default")
+S3method("hdi", "matrix")
+S3method("hdi", "data.frame")
+S3method("hdi", "density")
+S3method("hdi", "mcmc.list")
+S3method("hdi", "function")
+S3method("hdi", "bugs")
+S3method("hdi", "rjags")
+S3method("hdi", "runjags")
+S3method("hdi", "jagsUI")

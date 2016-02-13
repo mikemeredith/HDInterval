@@ -1,5 +1,5 @@
 
-# hpdi method for class function, where 'object' must be an
+# hdi method for class function, where 'object' must be an
 #   inverse cumulative density function (ICDF).
 # Based on Kruschke (2011) Doing Bayesian Data Analysis.
 
@@ -10,7 +10,7 @@
 #   credMass = 1 - user-specified credMass, with no indication of
 #   any issue.
 
-hpdi.function <- function(object, credMass=0.95, tol, ...)  {
+hdi.function <- function(object, credMass=0.95, tol, ...)  {
   checkCredMass(credMass)
   if(missing(tol))
     tol <- 1e-8

@@ -1,9 +1,9 @@
 
-# hpdi method for class stats::density, a list with elements 
+# hdi method for class stats::density, a list with elements 
 #  x = the n coordinates of the points where the density is estimated.
 #  y = the estimated density values.
 
-hpdi.density <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
+hdi.density <- function(object, credMass=0.95, allowSplit=FALSE, ...) {
   checkCredMass(credMass)
   sorted = sort( object$y , decreasing=TRUE )
   heightIdx = min( which( cumsum( sorted) >= sum(object$y) * credMass ) )

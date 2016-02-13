@@ -1,14 +1,15 @@
-\name{hpdi}
-\alias{hpdi}
-\alias{hpdi.default}
-\alias{hpdi.function}
-\alias{hpdi.matrix}
-\alias{hpdi.data.frame}
-\alias{hpdi.density}
-\alias{hpdi.mcmc.list}
-\alias{hpdi.bugs}
-\alias{hpdi.rjags}
-\alias{hpdi.runjags}
+\name{hdi}
+\alias{HDInterval}
+\alias{hdi}
+\alias{hdi.default}
+\alias{hdi.function}
+\alias{hdi.matrix}
+\alias{hdi.data.frame}
+\alias{hdi.density}
+\alias{hdi.mcmc.list}
+\alias{hdi.bugs}
+\alias{hdi.rjags}
+\alias{hdi.runjags}
 
 \title{
 Highest (Posterior) Density Interval
@@ -19,25 +20,25 @@ Calculate the highest density interval (HDI) for a probability distribution for 
 The function is an S3 generic, with methods for a range of input objects.
 }
 \usage{
-hpdi(object, credMass = 0.95, ...)
+hdi(object, credMass = 0.95, ...)
 
-\method{hpdi}{default}(object, credMass = 0.95, ...)
+\method{hdi}{default}(object, credMass = 0.95, ...)
 
-\method{hpdi}{function}(object, credMass = 0.95, tol, ...)
+\method{hdi}{function}(object, credMass = 0.95, tol, ...)
 
-\method{hpdi}{matrix}(object, credMass = 0.95, ...)
+\method{hdi}{matrix}(object, credMass = 0.95, ...)
 
-\method{hpdi}{data.frame}(object, credMass = 0.95, ...)
+\method{hdi}{data.frame}(object, credMass = 0.95, ...)
 
-\method{hpdi}{density}(object, credMass = 0.95, allowSplit=FALSE, ...)
+\method{hdi}{density}(object, credMass = 0.95, allowSplit=FALSE, ...)
 
-\method{hpdi}{mcmc.list}(object, credMass = 0.95, ...)
+\method{hdi}{mcmc.list}(object, credMass = 0.95, ...)
 
-\method{hpdi}{bugs}(object, credMass = 0.95, ...)
+\method{hdi}{bugs}(object, credMass = 0.95, ...)
 
-\method{hpdi}{rjags}(object, credMass = 0.95, ...)
+\method{hdi}{rjags}(object, credMass = 0.95, ...)
 
-\method{hpdi}{runjags}(object, credMass = 0.95, ...)
+\method{hdi}{runjags}(object, credMass = 0.95, ...)
 
 }
 \arguments{
@@ -64,7 +65,7 @@ The HDI is the interval which contains the required mass such that all points wi
 
 In contrast, a symmetric density interval defined by (eg.) the 10\% and 90\% quantiles may include values with lower probability than those excluded.
 
-For a distribution that is not severely multimodal, the HDI is the narrowest interval containing the specified mass, and the \code{hpdi} function actually returns the narrowest interval. This does not always work properly for multimodel densities, where the HDI may be discontinuous (the horizontal black line in the  Figure below). The single interval returned by \code{hpdi} (the blue line) may incorrectly include values between the modes with low probability density. The \code{density} method with \code{allowSplit = TRUE} gives separate limits for discontinuous HDIs.
+For a distribution that is not severely multimodal, the HDI is the narrowest interval containing the specified mass, and the \code{hdi} function actually returns the narrowest interval. This does not always work properly for multimodel densities, where the HDI may be discontinuous (the horizontal black line in the  Figure below). The single interval returned by \code{hdi} (the blue line) may incorrectly include values between the modes with low probability density. The \code{density} method with \code{allowSplit = TRUE} gives separate limits for discontinuous HDIs.
 
 \figure{HDIbimodal.jpg}
 
@@ -88,44 +89,44 @@ The \code{density} method with \code{allowSplit=TRUE} produces a matrix with a r
 Kruschke, J. K. 2011. \emph{Doing Bayesian data analysis: a tutorial with R and BUGS.} Elsevier, Amsterdam, section 3.3.5.
 }
 \author{
-John Krushke and Mike Meredith. Code for \code{hpdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
+John Krushke and Mike Meredith. Code for \code{hdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
 }
 
 \examples{
 # for a vector:
 tst <- rgamma(1e5, 2.5, 2)
-hpdi(tst)
-hpdi(tst, credMass=0.8)
+hdi(tst)
+hdi(tst, credMass=0.8)
 # For comparison, the symmetrical 80% CrI:
 quantile(tst, c(0.1,0.9))
 
 # for a density:
 dens <- density(tst)
-hpdi(dens, credMass=0.8)
+hdi(dens, credMass=0.8)
 
 # Now a data frame:
 tst <- data.frame(mu = rnorm(1e4, 4, 1), sigma = rlnorm(1e4))
-hpdi(tst, 0.8)
+hdi(tst, 0.8)
 apply(tst, 2, quantile, c(0.1,0.9))
 
 # For a function:
-hpdi(qgamma, 0.8, shape=2.5, rate=2)
+hdi(qgamma, 0.8, shape=2.5, rate=2)
 # and the symmetrical 80% CrI:
 qgamma(c(0.1, 0.9), 2.5, 2)
 
 # A severely bimodal distribution:
 tst2 <- c(rnorm(1e5), rnorm(5e4, 7))
 hist(tst2, freq=FALSE)
-(hdiMC <- hpdi(tst2))
+(hdiMC <- hdi(tst2))
 segments(hdiMC[1], 0, hdiMC[2], 0, lwd=3, col='red')
 # This is a valid 95% CrI, but not a Highest Density Interval
 
 dens2 <- density(tst2)
 lines(dens2, lwd=2, col='blue')
-(hdiD1 <- hpdi(dens2))  # default allowSplit = FALSE; note the warning
+(hdiD1 <- hdi(dens2))  # default allowSplit = FALSE; note the warning
 (ht <- attr(hdiD1, "height"))
 segments(hdiD1[1], ht, hdiD1[2], ht, lty=3, col='blue')
-(hdiD2 <- hpdi(dens2, allowSplit=TRUE))
+(hdiD2 <- hdi(dens2, allowSplit=TRUE))
 segments(hdiD2[, 1], ht, hdiD2[, 2], ht, lwd=3, col='blue')
 # This is the correct 95% HDI.
 }
