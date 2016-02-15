@@ -1,7 +1,7 @@
 # NAMESPACE for package 'HDInterval'
 
 importFrom("stats", "optimize")
-importFrom("coda", "as.mcmc.list")
+# importFrom("coda", "as.mcmc.list")
 
 export(hdi)
 

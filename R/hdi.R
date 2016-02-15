@@ -47,7 +47,7 @@ hdi.rjags <- function(object, credMass=0.95, ...)
   hdi.matrix(object$BUGSoutput$sims.matrix, credMass=credMass, ...)
 
 hdi.runjags <- function(object, credMass=0.95, ...)
-  hdi.mcmc.list(as.mcmc.list(object), credMass=credMass, ...)
+  hdi.mcmc.list(object$mcmc, credMass=credMass, ...)
 
 hdi.jagsUI <- function(object, credMass=0.95, ...)
   hdi.mcmc.list(object$samples, credMass=credMass, ...)
