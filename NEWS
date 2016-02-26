@@ -1,3 +1,15 @@
+CHANGES in 0.1.1.9000 on 2016-02-26
+
+  * Fixed multiple checks of credMass; hdiVector as separate function from hdi.default
+  
+  * Speeded up check for all-NAs
+  
+  * Fixed hdi.data.frame: now returns NAs for non-numeric columns.
+  
+CHANGES in 0.1.1 on 2016-02-15
+
+  * coda chaged from Depends to Suggests
+  
 CHANGES in 0.1.0 on 2016-02-14
 
   * package renamed HDInterval and main function renamed 'hdi'

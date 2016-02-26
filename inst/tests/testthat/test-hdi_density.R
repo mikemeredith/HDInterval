@@ -1,8 +1,8 @@
 
-# test_that code for hdi generic
+# test_that code for hdi.density
 
 
-context("Highest Density Interval (HDI)")
+context("hdi.density")
 
 test_that("hdi.density gives correct output",  {
   set.seed(123)
@@ -12,7 +12,7 @@ test_that("hdi.density gives correct output",  {
   expect_that(round(hdi(tst), 6), is_equivalent_to(c(-1.997715, 1.949980)))
   expect_that(round(hdi(tst, 0.6), 6), is_equivalent_to(c(-0.826789, 0.862691)))
   expect_that(round(hdi(tst, 0.9999999), 6), is_equivalent_to(c(-4.255930, 4.275105)))
-  expect_that(hdi(tst, 0), throws_error("credMass must be in 0 < credMass < 1"))
+  expect_that(hdi(tst, 0), throws_error("credMass must be between 0 and 1"))
   # with allowSplit = TRUE, but unimodal density (values should be same as above,
   #   but it's a matrix)
   expect_that(colnames(hdi(tst, allowSplit=TRUE)), equals(c("begin", "end")))

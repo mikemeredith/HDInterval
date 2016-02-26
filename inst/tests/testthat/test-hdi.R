@@ -16,12 +16,6 @@ test_that("hdi.default gives correct output",  {
   expect_that(round(hdi(tst), 6), is_equivalent_to(c(-2.029857, 1.881446)))
   expect_that(hdi(rep(NA_real_, 1e4)), is_equivalent_to(rep(NA_real_, 2)))
   expect_that(hdi(numeric(0)), is_equivalent_to(rep(NA_real_, 2)))
-  expect_that(hdi(tst, 0), throws_error("credMass must be in 0 < credMass < 1"))
-  expect_that(hdi(tst, 1), throws_error("credMass must be in 0 < credMass < 1"))
-  expect_that(hdi(tst, NA), throws_error("credMass must be in 0 < credMass < 1"))
-  expect_that(hdi(tst, (1:3)/5), throws_error("credMass must be in 0 < credMass < 1"))
-  expect_that(hdi(tst, -1), throws_error("credMass must be in 0 < credMass < 1"))
-  expect_that(hdi(tst, 2), throws_error("credMass must be in 0 < credMass < 1"))
   tstInf <- c(rep(-Inf, 1e3), rep(Inf, 1e3))
   expect_that(hdi(tstInf), is_equivalent_to(c(-Inf, Inf)))
   expect_that(hdi(letters), throws_error("No applicable method for class"))
@@ -42,25 +36,30 @@ test_that("hdi.matrix gives correct results", {
   expect_that(round(fakeres[1, ], 6), is_equivalent_to(c(3.783317, NA_real_, 0.259514)))
   expect_that(round(fakeres[2, ], 6), is_equivalent_to(c(5.623685, NA_real_, 1.554167)))
   expect_that(round(hdi(fake, 0.6)[1, ], 6), is_equivalent_to(c(4.313969, NA_real_, 0.432604)))
-  expect_that(hdi(fake, -1), throws_error("credMass must be in 0 < credMass < 1"))
+  expect_that(hdi(fake, -1), throws_error("credMass must be between 0 and 1"))
   na_mat <- matrix(NA_real_, 1e4, 3)
   expect_that(hdi(na_mat), is_equivalent_to(matrix(NA_real_, 2, 3)))
 } )
 
 test_that("hdi.data.frame gives correct results", {
   set.seed(123)
-  len <- 1e5
+  len <- 100
   fake <- data.frame('mu' = rnorm(len, 4.7, 0.47),
+                'sigma' = exp(rnorm(len, -0.28, 0.42)),
                 'nu' = NA,
-                'sigma' = exp(rnorm(len, -0.28, 0.42)))
+                'letters' = letters[1:25],
+                'factor' = as.factor(1:5), stringsAsFactors=FALSE)
+  # str(fake)
   fakeres <- hdi(fake)
-  expect_that(dim(fakeres), equals(c(2, 3)))
+  expect_that(dim(fakeres), equals(c(2, 5)))
   expect_that(rownames(fakeres), equals(c("lower", "upper")))
-  expect_that(colnames(fakeres), equals(c("mu", "nu", "sigma")))
-  expect_that(round(fakeres[1, ], 6), is_equivalent_to(c(3.783317, NA_real_, 0.259514)))
-  expect_that(round(fakeres[2, ], 6), is_equivalent_to(c(5.623685, NA_real_, 1.554167)))
-  expect_that(round(hdi(fake, 0.6)[1, ], 6), is_equivalent_to(c(4.313969, NA_real_, 0.432604)))
-  expect_that(hdi(fake, -1), throws_error("credMass must be in 0 < credMass < 1"))
+  expect_that(colnames(fakeres), equals(c("mu", "sigma", "nu", "letters", "factor")))
+  expect_that(round(fakeres[1, 1:2], 6), is_equivalent_to(c(4.105264, 0.319064)))
+  expect_that(round(fakeres[2, 1:2], 6), is_equivalent_to(c(5.728047, 1.685098)))
+  expect_that(as.vector(fakeres[, 3:5]), is_equivalent_to(rep(NA_real_, 6)))
+  expect_that(as.vector(round(hdi(fake, 0.6)[, 1:2], 6)),
+      is_equivalent_to(c(4.366676, 5.029637, 0.383080, 0.786412)))
+  expect_that(hdi(fake, -1), throws_error("credMass must be between 0 and 1"))
 } )
 
 
@@ -76,5 +75,19 @@ test_that("hdi.function gives correct results", {
   expect_that(hdi(qbeta, shape=2.5, rate=2),
     throws_error("Incorrect arguments for the inverse cumulative density function qbeta"))
 } )
+
+test_that("hdi gives correct error messages",  {
+  set.seed(123)
+  tst <- rnorm(1e4)
+  expect_that(hdi(tst, 0), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, 1), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, NA), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, (1:3)/5), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, -1), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, 2), throws_error("credMass must be between 0 and 1"))
+  tstInf <- c(rep(-Inf, 1e3), rep(Inf, 1e3))
+  expect_that(hdi(tstInf), is_equivalent_to(c(-Inf, Inf)))
+  expect_that(hdi(letters), throws_error("No applicable method for class"))
+}  )
 
 
