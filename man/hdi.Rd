@@ -89,7 +89,7 @@ The \code{density} method with \code{allowSplit=TRUE} produces a matrix with a r
 Kruschke, J. K. 2011. \emph{Doing Bayesian data analysis: a tutorial with R and BUGS.} Elsevier, Amsterdam, section 3.3.5.
 }
 \author{
-John Krushke and Mike Meredith. Code for \code{hdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
+Mike Meredith and John Krushke. Code for \code{hdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
 }
 
 \examples{
@@ -108,6 +108,8 @@ hdi(dens, credMass=0.8)
 tst <- data.frame(mu = rnorm(1e4, 4, 1), sigma = rlnorm(1e4))
 hdi(tst, 0.8)
 apply(tst, 2, quantile, c(0.1,0.9))
+tst$txt <- LETTERS[1:25]
+hdi(tst, 0.8)
 
 # For a function:
 hdi(qgamma, 0.8, shape=2.5, rate=2)

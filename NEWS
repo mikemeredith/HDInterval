@@ -1,4 +1,4 @@
-CHANGES in 0.1.1.9000 on 2016-02-26
+CHANGES in 0.1.2 on 2016-03-20
 
   * Fixed multiple checks of credMass; hdiVector as separate function from hdi.default
   
@@ -8,7 +8,7 @@ CHANGES in 0.1.1.9000 on 2016-02-26
   
 CHANGES in 0.1.1 on 2016-02-15
 
-  * coda chaged from Depends to Suggests
+  * coda changed from Depends to Suggests
   
 CHANGES in 0.1.0 on 2016-02-14
 
