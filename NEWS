@@ -1,3 +1,9 @@
+CHANGES in 0.1.2.9001
+
+  * added method for mcarray and list (to deal with rjags::jags.samples output).
+  
+  * fixed export of hdi.mcmc
+
 CHANGES in 0.1.2 on 2016-03-20
 
   * Fixed multiple checks of credMass; hdiVector as separate function from hdi.default

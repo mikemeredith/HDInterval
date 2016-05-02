@@ -26,6 +26,17 @@ hdi.data.frame <- function(object, credMass=0.95, ...) {
   return(result)
 }
 
+hdi.list <- function(object, credMass=0.95, ...) {
+  lapply(object, hdi, credMass = credMass)
+}
+
+hdi.mcarray <- function(object, credMass=0.95, ...) {
+  checkCredMass(credMass)
+  result <- apply(object, 1, hdiVector, credMass = credMass)
+  attr(result, "credMass") <- credMass
+  return(result)
+}
+
 hdi.mcmc.list <- function(object, credMass=0.95, ...)
   hdi.matrix(as.matrix(object), credMass=credMass, ...)
 
@@ -33,7 +44,7 @@ hdi.mcmc <- function(object, credMass=0.95, ...)
   hdi.matrix(as.matrix(object), credMass=credMass, ...)
 
 hdi.bugs <- function(object, credMass=0.95, ...)
-  hdi.matrix(object$sims.matrix, credMass=credMass, ...)
+  hdi(object$sims.matrix, credMass=credMass, ...)
 
 hdi.rjags <- function(object, credMass=0.95, ...)
   hdi.matrix(object$BUGSoutput$sims.matrix, credMass=credMass, ...)

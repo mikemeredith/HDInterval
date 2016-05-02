@@ -5,6 +5,7 @@
 \alias{hdi.function}
 \alias{hdi.matrix}
 \alias{hdi.data.frame}
+\alias{hdi.list}
 \alias{hdi.density}
 \alias{hdi.mcmc.list}
 \alias{hdi.bugs}
@@ -29,6 +30,8 @@ hdi(object, credMass = 0.95, ...)
 \method{hdi}{matrix}(object, credMass = 0.95, ...)
 
 \method{hdi}{data.frame}(object, credMass = 0.95, ...)
+
+\method{hdi}{list}(object, credMass = 0.95, ...)
 
 \method{hdi}{density}(object, credMass = 0.95, allowSplit=FALSE, ...)
 
@@ -72,9 +75,11 @@ For a distribution that is not severely multimodal, the HDI is the narrowest int
 
 The default method expects a vector representing draws from the target distribution, such as is produced by an MCMC process. Missing values are silently ignored; if the vector has no non-missing values, NAs are returned.
 
-The matrix and data frame methods expect an object with vectors of the above type for each parameter in columns. The result is a matrix with parameters in columns and rows with the upper and lower limits of the HDI.
+The \code{matrix} and \code{data.frame} methods expect an object with vectors of the above type for each parameter in columns. The result is a matrix with parameters in columns and rows with the upper and lower limits of the HDI.
 
-The mcmc.list method expects an object of type mcmc.list as defined in package coda.
+The \code{list} method is a wrapper for \code{lapply(object, hdi, ...)}. It is intended for output from \code{rjags::jags.samples} which returns a list of \code{mcarray} objects.
+
+The \code{mcmc.list}, \code{mcmc} and \code{mcarray} methods expect objects of the respective types as defined in package \pkg{coda}.
 
 None of the above use interpolation: the values returned correspond to specific values in the data object, and should be conservative (ie, too wide rather than too narrow). Results thus depend on the random draws, and will be unstable if few values are provided. For a 95\% HDI, 10,000 independent draws are recommended; a smaller number will be adequate for a 80\% HDI, many more for a 99\% HDI.
 
