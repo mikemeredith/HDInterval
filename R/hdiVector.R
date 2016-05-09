@@ -6,7 +6,7 @@
 hdiVector <- function(object, credMass=0.95, ...) {
   result <- c(NA_real_, NA_real_)
   if(is.numeric(object)) {
-    x <- sort(object)  # also removes NAs
+    x <- sort.int(object, method='quick')  # also removes NAs
     n <- length(x)
     if(n > 0) {
       # exclude <- ceiling(n * (1 - credMass)) # Not always the same as...
