@@ -7,8 +7,11 @@
 \alias{hdi.data.frame}
 \alias{hdi.list}
 \alias{hdi.density}
+\alias{hdi.mcmc}
+\alias{hdi.mcarray}
 \alias{hdi.mcmc.list}
 \alias{hdi.bugs}
+\alias{hdi.jagsUI}
 \alias{hdi.rjags}
 \alias{hdi.runjags}
 
@@ -35,13 +38,19 @@ hdi(object, credMass = 0.95, ...)
 
 \method{hdi}{density}(object, credMass = 0.95, allowSplit=FALSE, ...)
 
-\method{hdi}{mcmc.list}(object, credMass = 0.95, ...)
+\method{hdi}{mcmc}(object, credMass = 0.95, ...)  % from 'coda'
 
-\method{hdi}{bugs}(object, credMass = 0.95, ...)
+\method{hdi}{mcmc.list}(object, credMass = 0.95, ...)  % from 'coda'
 
-\method{hdi}{rjags}(object, credMass = 0.95, ...)
+\method{hdi}{mcarray}(object, credMass = 0.95, ...)  % from 'coda'
 
-\method{hdi}{runjags}(object, credMass = 0.95, ...)
+\method{hdi}{bugs}(object, credMass = 0.95, ...)  % from 'R2winbugs' or 'R2openbugs'
+
+\method{hdi}{jagsUI}(object, credMass = 0.95, ...)  % from 'jagsUI'
+
+\method{hdi}{rjags}(object, credMass = 0.95, ...)  % from 'R2jags'
+
+\method{hdi}{runjags}(object, credMass = 0.95, ...)  % from 'runjags'
 
 }
 \arguments{
@@ -81,7 +90,9 @@ The \code{list} method is a wrapper for \code{lapply(object, hdi, ...)}. It is i
 
 The \code{mcmc.list}, \code{mcmc} and \code{mcarray} methods expect objects of the respective types as defined in package \pkg{coda}.
 
-None of the above use interpolation: the values returned correspond to specific values in the data object, and should be conservative (ie, too wide rather than too narrow). Results thus depend on the random draws, and will be unstable if few values are provided. For a 95\% HDI, 10,000 independent draws are recommended; a smaller number will be adequate for a 80\% HDI, many more for a 99\% HDI.
+The packages \pkg{R2winbugs} and \pkg{R2openbugs} produce \code{bugs} objects; \pkg{R2jags} produces \code{rjags}; \pkg{jagsUI} produces \code{jagsUI}; \pkg{runjags} produces \code{runjags}. For the \pkg{rjags} package, \code{rjags::coda.samples} produces a \code{mcmc.list} object and \code{rjags::jags.samples} produces a list of \code{mcarray} objects.
+
+None of the above use interpolation: the values returned correspond to specific values in the data object, and will be conservative (ie, too wide rather than too narrow). Results thus depend on the random draws, and will be unstable if few values are provided. For a 95\% HDI, 10,000 independent draws are recommended; a smaller number will be adequate for a 80\% HDI, many more for a 99\% HDI.
 
 The function method requires the name for the inverse cumulative density function (ICDF) of the distribution; standard R functions for this have a \code{q-} prefix, eg. \code{qbeta}. Arguments required by the ICDF must be specified by their (abbreviated) names; see the examples.
 }

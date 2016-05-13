@@ -1,16 +1,9 @@
-CHANGES in 0.1.2.9003
+CHANGES in 0.1.3 on 2016-05-13
 
-  * remove attributes before sorting gives big speedup.
+  * various tweaks to speed up analysis with large objects
 
-CHANGES in 0.1.2.9002
-
-  * use sort.int(*, method='quick')
-  
-CHANGES in 0.1.2.9001
-
-  * added method for mcarray and list (to deal with rjags::jags.samples output).
-  
-  * fixed export of hdi.mcmc
+  * added method for mcarray and list (to deal with rjags::jags.samples output); fixed
+  export of hdi.mcmc
 
 CHANGES in 0.1.2 on 2016-03-20
 
