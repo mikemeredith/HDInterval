@@ -1,6 +1,6 @@
 # NAMESPACE for package 'HDInterval'
 
-importFrom("stats", "optimize")
+importFrom("stats", "optimize", "uniroot")
 
 export(hdi)
 
@@ -17,3 +17,5 @@ S3method("hdi", "bugs")
 S3method("hdi", "rjags")
 S3method("hdi", "runjags")
 S3method("hdi", "jagsUI")
+
+export("inverseCDF")

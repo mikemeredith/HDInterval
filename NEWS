@@ -1,11 +1,15 @@
-CHANGES in 0.1.3 on 2016-05-13
+CHANGES in 0.1.3.9000 (2017-11-23)
+
+  * added the inverseCDF function (prompted by Haibing Zhao)
+
+CHANGES in 0.1.3 (2016-05-13)
 
   * various tweaks to speed up analysis with large objects
 
   * added method for mcarray and list (to deal with rjags::jags.samples output); fixed
   export of hdi.mcmc
 
-CHANGES in 0.1.2 on 2016-03-20
+CHANGES in 0.1.2 (2016-03-20)
 
   * Fixed multiple checks of credMass; hdiVector as separate function from hdi.default
   
@@ -13,15 +17,15 @@ CHANGES in 0.1.2 on 2016-03-20
   
   * Fixed hdi.data.frame: now returns NAs for non-numeric columns.
   
-CHANGES in 0.1.1 on 2016-02-15
+CHANGES in 0.1.1 (2016-02-15)
 
   * coda changed from Depends to Suggests
   
-CHANGES in 0.1.0 on 2016-02-14
+CHANGES in 0.1.0 (2016-02-14)
 
   * package renamed HDInterval and main function renamed 'hdi'
 
-CHANGES in 0.0.2 on 2016-02-10
+CHANGES in 0.0.2 (2016-02-10)
 
   * hpdi.density now returns a length-2 vector when allowSplit=FALSE, otherwise a matrix,
       which may have only one row.
