@@ -105,7 +105,7 @@ The \code{density} method with \code{allowSplit=TRUE} produces a matrix with a r
 Kruschke, J. K. 2011. \emph{Doing Bayesian data analysis: a tutorial with R and BUGS.} Elsevier, Amsterdam, section 3.3.5.
 }
 \author{
-Mike Meredith and John Krushke. Code for \code{hdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
+Mike Meredith and John Kruschke. Code for \code{hdi.function} based on \code{hpd} by Greg Snow, corrected by John Kruschke.
 }
 
 \examples{
