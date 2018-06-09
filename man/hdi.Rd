@@ -64,7 +64,7 @@ a scalar [0, 1] specifying the mass within the credible interval.
 the desired accuracy; see \code{\link{optimize}}; default is 1e-8.
 }
   \item{allowSplit}{
-if FALSE and the proper HDI is discontinuous, a single credible interval is returned, but this is not HDI; see Value.
+only available for objects of class \code{density}; if FALSE and the proper HDI is discontinuous, a single credible interval is returned, but this is not HDI; see Value.
 }
   \item{\dots}{
 named parameters to be passed to other methods; see Examples.

@@ -1,4 +1,4 @@
-# This file has the S3 generic 'hpdi' function and a series of methods.
+# This file has the S3 generic 'hdi' function and a series of methods.
 
 hdi <- function(object, credMass=0.95, ...) UseMethod("hdi")
 
