@@ -1,3 +1,8 @@
+CHANGES in 0.2.0.9000 (2018-12-18)
+
+  * Fixed error when input is an entire vector of Inf (or -Inf); (Inf/-Inf)
+    mixed with other non-NA values was always ok).
+
 CHANGES in 0.2.0 (2018-06-09)
 
   * added the inverseCDF function (prompted by Haibing Zhao)
