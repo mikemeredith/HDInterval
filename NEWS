@@ -1,4 +1,4 @@
-CHANGES in 0.2.1.9000 (2019-01-04)
+CHANGES in 0.2.2 (2019-01-05)
 
   * Fixed bug in inverseCDF when p is a vector, also p = 0 or 1.
 
@@ -9,13 +9,13 @@ CHANGES in 0.2.1 (2018-12-24)
 
 CHANGES in 0.2.0 (2018-06-09)
 
-  * added the inverseCDF function (prompted by Haibing Zhao)
+  * Added the inverseCDF function (prompted by Haibing Zhao)
 
 CHANGES in 0.1.3 (2016-05-13)
 
-  * various tweaks to speed up analysis with large objects
+  * Various tweaks to speed up analysis with large objects
 
-  * added method for mcarray and list (to deal with rjags::jags.samples output); fixed
+  * Added method for mcarray and list (to deal with rjags::jags.samples output); fixed
   export of hdi.mcmc
 
 CHANGES in 0.1.2 (2016-03-20)
