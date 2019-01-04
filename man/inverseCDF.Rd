@@ -12,10 +12,10 @@ inverseCDF(p, CDF, ...)
 }
 \arguments{
   \item{p}{
-a vector of probabilities
+a vector of probabilities. Values less than 1e6 will be replaced with 1e6 and values greater than (1 - 1e-6) will be replaced with (1 - 1e-6), without a warning.
 }
   \item{CDF}{
-a cummulative density function; standard CDFs in R begin with \code{p-}, eg, \code{pnorm}.
+a cumulative density function; standard CDFs in R begin with \code{p-}, eg, \code{pnorm}.
 }
   \item{\dots}{
 named parameters to be passed to the CDF function; see Examples; \code{log.p} and \code{lower.tail} are not supported and generate an error.
@@ -35,6 +35,8 @@ Mike Meredith
 # Try with pgamma/qgamma
 inverseCDF(c(0.025, 0.975), pgamma, shape=2.5, rate=2) # 95\% interval
 qgamma(c(0.025, 0.975), shape=2.5, rate=2) # for comparison
+inverseCDF(c(0, 1), pgamma, shape=2.5, rate=2) # nonsense, fixed internally...
+inverseCDF(c(1e-6, 1 - 1e-6), pgamma, shape=2.5, rate=2) # ...same.
 
 # Plug inverseCDF into hdi, need to specify the CDF
 hdi(inverseCDF, CDF=pgamma, shape=2.5, rate=2)

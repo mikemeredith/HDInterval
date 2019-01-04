@@ -16,5 +16,10 @@ test_that("inverseCDF gives correct output",  {
   expect_equivalent(round(ci95, 5), c(-1.73185,  6.16957))
   hdi95 <- hdi(inverseCDF, CDF=pmixg)
   expect_equivalent(round(hdi95, 5), c(-1.87076, 5.99713))
+  
+  expect_error(inverseCDF(c(-0.025, 0.975), pgamma, shape=2.5, rate=2),
+    "'p' must be a probability")
+  ci01 <- inverseCDF(c(0, 1), pgamma, shape=2.5, rate=2)
+  expect_equivalent(ci01, c(0.00324027, 8.97204887))
 }  )
 
