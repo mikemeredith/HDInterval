@@ -2,10 +2,10 @@ Package: HDInterval
 Type: Package
 Title: Highest (Posterior) Density Intervals
 Version: 0.2.2
-Date: 2019-01-05
+Date: 2020-05-18
 Suggests: coda
 Author: Mike Meredith and John Kruschke
-Maintainer: Mike Meredith <mmeredith@wcs.org>
+Maintainer: Mike Meredith <mike@mmeredith.net>
 Description: A generic function and a set of methods to calculate highest density intervals for a variety of classes of objects which can specify a probability density distribution, including MCMC output, fitted density objects, and functions.
 License: GPL-3
 NeedsCompilation: no
