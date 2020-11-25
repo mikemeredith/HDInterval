@@ -97,7 +97,7 @@ None of the above use interpolation: the values returned correspond to specific 
 The function method requires the name for the inverse cumulative density function (ICDF) of the distribution; standard R functions for this have a \code{q-} prefix, eg. \code{qbeta}. Arguments required by the ICDF must be specified by their (abbreviated) names; see the examples.
 }
 \value{
-a vector of length 2 or a 2-row matrix with the lower and upper limits of the HDI, with an attribute "credMass". 
+a vector of length 2 or a 2-row matrix with the lower and upper limits of the HDI, with an attribute "credMass".
 
 The \code{density} method with \code{allowSplit=TRUE} produces a matrix with a row for each component of a discontinuous HDI and columns for begin and end. It has an additional attribute "height" giving the probability density at the limits of the HDI.
 }
@@ -132,20 +132,19 @@ hdi(qgamma, 0.8, shape=2.5, rate=2)
 # and the symmetrical 80% CrI:
 qgamma(c(0.1, 0.9), 2.5, 2)
 
-# A severely bimodal distribution:
-tst2 <- c(rnorm(1e5), rnorm(5e4, 7))
-hist(tst2, freq=FALSE)
+# A multimodal distribution:
+set.seed(2020)
+tst2 <- c(rnorm(500, 30, 3), rnorm(200, 50, 1.5), 60 + rexp(200, 0.1))
+hist(tst2, breaks = 100, freq=FALSE)
 (hdiMC <- hdi(tst2))
-segments(hdiMC[1], 0, hdiMC[2], 0, lwd=3, col='red')
+segments(hdiMC[1], 0, hdiMC[2], 0, lwd=4, col='red', lend='butt')
 # This is a valid 95% CrI, but not a Highest Density Interval
 
-dens2 <- density(tst2)
+dens2 <- density(tst2, bw="SJ") # not the default for 'bw', see ?density
 lines(dens2, lwd=2, col='blue')
-(hdiD1 <- hdi(dens2))  # default allowSplit = FALSE; note the warning
-(ht <- attr(hdiD1, "height"))
-segments(hdiD1[1], ht, hdiD1[2], ht, lty=3, col='blue')
-(hdiD2 <- hdi(dens2, allowSplit=TRUE))
-segments(hdiD2[, 1], ht, hdiD2[, 2], ht, lwd=3, col='blue')
+(hdiD <- hdi(dens2, allowSplit=TRUE))
+(ht <- attr(hdiD, "height"))
+segments(hdiD[, 1], ht, hdiD[, 2], ht, lwd=4, col='blue', lend='butt')
 # This is the correct 95% HDI.
 }
 \keyword{methods}

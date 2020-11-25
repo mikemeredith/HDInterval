@@ -1,6 +1,12 @@
-CHANGES in 0.2.2 (2019-01-05)
+CHANGES in 0.2.2.9000 (2020-11-25)
+
+  * Better example for multimodal distribution.
+
+CHANGES in 0.2.2 (2020-05-18)
 
   * Fixed bug in inverseCDF when p is a vector, also p = 0 or 1.
+
+  * Changed maintainer email.
 
 CHANGES in 0.2.1 (2018-12-24)
 

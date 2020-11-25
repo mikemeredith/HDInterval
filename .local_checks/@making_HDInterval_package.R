@@ -14,17 +14,26 @@ tmp  # error if length == 0
 
 # Development
 # ===========
-devtools::load_all("C:/GitHub/HDInterval_package/HDInterval")
+devtools::load_all("HDInterval")
 system("R CMD INSTALL HDInterval") # Use this for a "dev" install.
 
 # Build and check
 # ===============
 unlink(list.files(pattern="Rplots.pdf", recursive=TRUE))
 system("R CMD build HDInterval")  # Produces the .tar.gz file
-system("R CMD check HDInterval_0.2.2.tar.gz")
-# system("R CMD check --as-cran HDInterval_0.2.2.tar.gz")
-# system("R CMD INSTALL --build HDInterval_0.2.2.tar.gz") # installs and produces the .zip binary
-system("R CMD INSTALL HDInterval_0.2.2.tar.gz") # installs only
+pkg <- "HDInterval_0.2.2.9000.tar.gz"  # <-- fix version number here ################
+
+# Pick one to check:
+## on desktop
+system(paste("R CMD check ", pkg))
+system(paste("R CMD check ", pkg, "--as-cran"))  # as-cran now runs donttest
+## on laptop
+system(paste("R CMD check ", pkg, "--no-manual"))
+system(paste("R CMD check ", pkg, "--as-cran --no-manual"))
+
+# Pick one to install
+system(paste("R CMD INSTALL ", pkg))            # install only
+system(paste("R CMD INSTALL ", pkg, "--build")) # install and produce the .zip binary
 
 library(testthat)
 test_package("HDInterval")
@@ -34,6 +43,7 @@ test_package("HDInterval")
 library(HDInterval)
 ?HDInterval
 
+example(hdi)
 tst <- rgamma(1e5, 2.5, 2)
 hist(tst)
 hdi(tst)

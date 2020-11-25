@@ -1,8 +1,8 @@
 Package: HDInterval
 Type: Package
 Title: Highest (Posterior) Density Intervals
-Version: 0.2.2
-Date: 2020-05-18
+Version: 0.2.2.9000
+Date: 2020-11-25
 Suggests: coda
 Author: Mike Meredith and John Kruschke
 Maintainer: Mike Meredith <mike@mmeredith.net>
