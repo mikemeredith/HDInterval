@@ -1,4 +1,10 @@
-CHANGES in 0.2.2.9000 (2020-11-25)
+CHANGES in 0.2.3 (2022-11-15)
+
+  * Ngumbang as maintainer.
+
+  * Replaced if(class(.) == ...) with if(inherits(...))
+
+  * Fixed issue with checking credMass.
 
   * Better example for multimodal distribution.
 

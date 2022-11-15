@@ -14,7 +14,8 @@ hdi.function <- function(object, credMass=0.95, tol, ...)  {
   checkCredMass(credMass)
   if(missing(tol))
     tol <- 1e-8
-  if(class(try(object(0.5, ...), TRUE)) == "try-error")
+  tmp <- try(object(0.5, ...), TRUE)
+  if(inherits(tmp, "try-error"))
     stop(paste("Incorrect arguments for the inverse cumulative density function",
         substitute(object)))
   # cf. code in Kruschke 2011 p630

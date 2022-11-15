@@ -88,7 +88,7 @@ test_that("hdi gives correct error messages",  {
   expect_that(hdi(tst, 0), throws_error("credMass must be between 0 and 1"))
   expect_that(hdi(tst, 1), throws_error("credMass must be between 0 and 1"))
   expect_that(hdi(tst, NA), throws_error("credMass must be between 0 and 1"))
-  expect_that(hdi(tst, (1:3)/5), throws_error("credMass must be between 0 and 1"))
+  expect_that(hdi(tst, (1:3)/5), throws_error("credMass must be a single value"))
   expect_that(hdi(tst, -1), throws_error("credMass must be between 0 and 1"))
   expect_that(hdi(tst, 2), throws_error("credMass must be between 0 and 1"))
   tstInf <- c(rep(-Inf, 1e3), rep(Inf, 1e3))
