@@ -1,10 +1,10 @@
 Package: HDInterval
 Type: Package
 Title: Highest (Posterior) Density Intervals
-Version: 0.2.3
-Date: 2022-11-15
+Version: 0.2.4
+Date: 2022-11-16
 Suggests: coda
-Authors@R: c(person("Ngumbang", "Juat", role="cre", email="mgumbangjuat@hotmail.com"),
+Authors@R: c(person("Ngumbang", "Juat", role="cre", email="ngumbangjuat@hotmail.com"),
   person("Mike", "Meredith", role="aut"),
   person("John", "Kruschke", role="aut"))
 Description: A generic function and a set of methods to calculate highest density intervals for a variety of classes of objects which can specify a probability density distribution, including MCMC output, fitted density objects, and functions.

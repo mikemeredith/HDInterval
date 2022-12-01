@@ -21,7 +21,7 @@ system("R CMD INSTALL HDInterval") # Use this for a "dev" install.
 # ===============
 unlink(list.files(pattern="Rplots.pdf", recursive=TRUE))
 system("R CMD build HDInterval")  # Produces the .tar.gz file
-pkg <- "HDInterval_0.2.3.tar.gz"  # <-- fix version number here ################
+pkg <- "HDInterval_0.2.4.tar.gz"  # <-- fix version number here ################
 
 # Pick one to check:
 ## on desktop
